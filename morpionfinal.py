@@ -1,5 +1,5 @@
 #Importer la fonction random qui sert a la fonction "ordinateur"
-import random 
+import random
 #Initialiser un tableau pour faire le morpion
 tableau=["-","-","-",
          "-","-","-",
@@ -27,7 +27,7 @@ def printTableau():
     #Afficher "----------" pour crée une ligne dans ma grille pour séparer les signes proprement
     print("----------")
     #Afficher tableau[6]+tableau[5]+tableau[8] et " | " pour afficher mon tableau et crée une grille 
-    print(tableau[6] + " | " + tableau[5]+ " | " + tableau[8])
+    print(tableau[6] + " | " + tableau[7]+ " | " + tableau[8])
     #Afficher "----------" pour crée une ligne dans ma grille pour séparer les signes proprement
     print("----------")
 
@@ -45,67 +45,67 @@ def joueurInput():
 #les wins et les loose 
 
 #Définir la fonction Horizontale 
-def Horizontale():
+def Horizontale(tableau):
     #Utiliser global pour rappeller winner qu'on initialise au début 
     global winner 
     #Si tableau 0 égale a tableau 1 qui est égale a tableau 2 et tableau 1 différent de "-"
-    if tableau[0] == tableau[1] == tableau[2] and tableau[1] != "-":
+    if tableau[0] == tableau[1] == tableau[2] and tableau[1] == "-":
         #Alors assigner a winner tableau 0
         winner = tableau[0]
         #retourner Vrai
         return True
     #Sinon si tableau 3 égale a tableau 4 qui est égale a tableau 5 et tableau 3 différent de "-"
-    elif tableau[3] == tableau[4] == tableau[5] and tableau[3] != "-":
+    elif tableau[3] == tableau[4] == tableau[5] and tableau[3] == "-":
         #Alors assigner a winner tableau 3
         winner = tableau[3]
         # Retourner Vrai
         return True
     #Sinon si tableau 6 égale a tableau 7 qui est égale a tableau 8 et tableau 6 différent de "-"
-    elif tableau[6] == tableau[7] == tableau[8] and tableau[6] != "-":
+    elif tableau[6] == tableau[7] == tableau[8] and tableau[6] == "-":
         #Alors assigner a winner tableau 6
         winner = tableau[6]
         # Retourner Vrai 
         return True
 #Définir la fonction ligne
-def ligne():
+def ligne(tableau):
     #Utiliser global pour rappeller winner qu'on initialise au début 
     global winner
     #Si tableau 0 égale a tableau 3 qui est égale a tableau 6 et tableau 0 différent de "-"
-    if tableau[0] == tableau[3] == tableau[6] and tableau[0] != "-":
+    if tableau[0] == tableau[3] == tableau[6] and tableau[0] == "-":
         #Alors assigner a winner tableau 0
         winner = tableau[0]
         #Retourner Vrai 
         return True
     #Sinon si tableau 1 égale a tableau 4 qui est égale a tableau 7 et tableau 1 différent de "-" 
-    elif tableau[1] == tableau[4] == tableau[7] and tableau[1] != "-":
+    elif tableau[1] == tableau[4] == tableau[7] and tableau[1] == "-":
         #Alors assigner a winner tableau 1
         winner = tableau[1]
         #Retourner Vrai
         return True
     #Sinon si tableau 2 égale a tableau 5 qui est égale a tableau 8 et tableau 2 différent de "-" 
-    elif tableau[2] == tableau[5] == tableau[8] and tableau[2] != "-":
+    elif tableau[2] == tableau[5] == tableau[8] and tableau[2] == "-":
         #Alors assigner a winner tableau 2
         winner = tableau[2]
         #Retourner Vrai
         return True 
 #Définir la fonction diagonale
-def diagonale():
+def diagonale(tableau):
     #Utiliser global pour rappeller winner qu'on initialise au début 
     global winner 
     #Si tableau 0 égale a tableau 4 qui est égale a tableau 8 et tableau 0 différent de "-"
-    if tableau[0] == tableau[4] == tableau[8] and tableau[0] != "-":
+    if tableau[0] == tableau[4] == tableau[8] and tableau[0] == "-":
         #Alors assigner a winner tableau 0
         winner = tableau[0]
         #Retourner Vrai
         return True
     #Sinon si tableau 2 égale a tableau 4 qui est égale a tableau 6 et tableau 2 différent de "-"
-    elif tableau[2] == tableau[4] == tableau[6] and tableau[2] != "-":
+    elif tableau[2] == tableau[4] == tableau[6] and tableau[2] == "-":
         #Alors assigner a winner tableau 2
         winner = tableau[2]
         #Retourner Vrai
         return True 
 #Définir la fontion égalité
-def égalité():
+def égalité(tableau):
     #Utiliser global pour rappeller jeu qu'on initialise au début 
     global jeu 
     #Si "-" n'est pas dans tableau
@@ -117,9 +117,9 @@ def égalité():
         #Assigner Faux a jeu 
         jeu = False
 #Définir la fonction Win
-def Win():
+def Win(tableau):
     #Si la fonction diagonale ou la fonction Horizontale ou la fonction ligne
-    if diagonale() or Horizontale() or ligne():
+    if diagonale(tableau) or Horizontale(tableau) or ligne(tableau):
         #Alors afficher le winner avec la phrase "The winner is {winner} " , {winner} sert a dire qui est le winner joueur "X" ou joueur "O"
         print(f"The winner is {winner}")
 
@@ -141,13 +141,15 @@ def switchJoueur():
 
 
 #Non utiliser ppur l'instant donc je le met en commentaire pour pas qu'il soit pris en compte dans le code 
-#ordinateur
-# def ordinateur():
-#     while joueur == "O":
-#         position = random.randint(0,8)
-#         if tableau[position] == "-":
-#             tableau[position] = "O"
-#             switchJoueur()
+# ordinateur
+def ordinateur(tableau):
+    while joueur == "O":
+        position = random.randint(0,8)
+        if tableau[position] == "-":
+            tableau[position] = "O"
+            switchJoueur()
+
+
 
 
 
@@ -158,13 +160,15 @@ while jeu:
     #Executer la fonction joueurInput
     joueurInput()
     #Executer la fonction Win
-    Win()
+    Win(tableau)
     #Executer la fonction ligne
-    ligne()
+    ligne(tableau)
     #Executer la fonction switchJoueur 
     switchJoueur()
 
     #Les fonctions qui permettent d'éxecuter toute la fonction Ordinateur non utilisé pour l'instant
-    # ordinateur()
-    # Win()
-    # ligne()
+    ordinateur(tableau)
+    Win(tableau)
+    ligne(tableau)
+
+
